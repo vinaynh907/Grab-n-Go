@@ -4,177 +4,515 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Grab & Go | Smart Canteen</title>
+    <title>Grab & Go | Smart College Canteen</title>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background: #f7f8fc;
+            background: #f7f7f5;
             color: #171717;
-            min-height: 100vh;
         }
 
-        /* Navigation */
+        /* NAVBAR */
+
         nav {
+            width: 100%;
             height: 75px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 7%;
-            background: white;
-            border-bottom: 1px solid #eeeeee;
+            background: rgba(255,255,255,0.92);
+            border-bottom: 1px solid #e8e8e8;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .logo span {
             color: #ff6b35;
         }
 
-        .nav-link {
-            color: #555;
-            text-decoration: none;
-            font-size: 15px;
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
         }
 
-        /* Hero Section */
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+
+        .nav-button {
+            background: #171717;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* HERO */
+
         .hero {
-            min-height: calc(100vh - 75px);
+            min-height: 680px;
+            padding: 90px 7%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 60px 7%;
-            gap: 50px;
+            gap: 60px;
         }
 
         .hero-text {
-            max-width: 600px;
+            max-width: 650px;
         }
 
         .tag {
             display: inline-block;
+            padding: 9px 15px;
             background: #fff0ea;
-            color: #ff6b35;
-            padding: 9px 16px;
+            color: #ff5c28;
             border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 22px;
-        }
-
-        h1 {
-            font-size: clamp(45px, 6vw, 76px);
-            line-height: 1.05;
-            letter-spacing: -3px;
+            font-size: 13px;
+            font-weight: bold;
             margin-bottom: 25px;
         }
 
-        h1 span {
+        .hero h1 {
+            font-size: clamp(48px, 7vw, 82px);
+            line-height: 0.98;
+            letter-spacing: -5px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
             color: #ff6b35;
         }
 
-        .description {
+        .hero p {
             font-size: 18px;
             line-height: 1.7;
             color: #666;
-            max-width: 520px;
+            max-width: 570px;
             margin-bottom: 35px;
         }
 
-        .button {
-            display: inline-block;
-            background: #171717;
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn {
+            background: #ff6b35;
             color: white;
             text-decoration: none;
-            padding: 16px 28px;
+            padding: 16px 27px;
             border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            transition: 0.2s;
+            font-weight: bold;
+            transition: 0.25s;
         }
 
-        .button:hover {
-            transform: translateY(-2px);
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            background: #f45b25;
         }
 
-        /* Right Side */
-        .hero-card {
-            width: 360px;
-            height: 360px;
+        .secondary-btn {
             background: white;
-            border-radius: 35px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            color: #171717;
+            text-decoration: none;
+            padding: 16px 27px;
+            border-radius: 12px;
+            font-weight: bold;
+            border: 1px solid #ddd;
+        }
+
+        /* HERO CARD */
+
+        .hero-card {
+            width: 390px;
+            min-width: 320px;
+            background: #171717;
+            color: white;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.18);
+            transform: rotate(2deg);
+        }
+
+        .card-top {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .status {
+            background: #243c2d;
+            color: #72e69a;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
         }
 
         .food-icon {
-            font-size: 120px;
+            width: 110px;
+            height: 110px;
+            border-radius: 25px;
+            background: #ff6b35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 55px;
+            margin-bottom: 25px;
         }
 
-        .floating-card {
-            position: absolute;
-            background: white;
-            padding: 15px 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .hero-card h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .hero-card p {
+            color: #aaa;
             font-size: 14px;
-            font-weight: 600;
+            line-height: 1.6;
         }
 
-        .token {
-            top: 35px;
-            right: -35px;
+        .token-box {
+            margin-top: 30px;
+            padding: 18px;
+            border-radius: 15px;
+            background: #252525;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .ready {
-            bottom: 35px;
-            left: -35px;
+        .token-box small {
+            color: #999;
         }
 
-        /* Mobile */
-        @media (max-width: 800px) {
-            nav {
-                padding: 0 5%;
+        .token-number {
+            font-size: 25px;
+            font-weight: bold;
+            color: #ff8a5c;
+        }
+
+        /* STATS */
+
+        .stats {
+            padding: 20px 7% 80px;
+        }
+
+        .stats-container {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 22px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            overflow: hidden;
+        }
+
+        .stat {
+            padding: 30px;
+            text-align: center;
+            border-right: 1px solid #eee;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat h2 {
+            font-size: 35px;
+            margin-bottom: 7px;
+        }
+
+        .stat p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* SECTION */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-title {
+            max-width: 650px;
+            margin-bottom: 55px;
+        }
+
+        .section-title span {
+            color: #ff6b35;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 {
+            font-size: 48px;
+            letter-spacing: -2px;
+            margin-top: 12px;
+        }
+
+        .section-title p {
+            color: #777;
+            margin-top: 15px;
+            line-height: 1.7;
+        }
+
+        /* FEATURES */
+
+        .features {
+            background: #171717;
+            color: white;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            padding: 35px;
+            border: 1px solid #333;
+            border-radius: 22px;
+            background: #202020;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px);
+            border-color: #ff6b35;
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            margin-bottom: 25px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #aaa;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* HOW IT WORKS */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            padding: 25px;
+            border-top: 2px solid #171717;
+        }
+
+        .step-number {
+            font-size: 13px;
+            color: #ff6b35;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .step h3 {
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .step p {
+            color: #777;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* CTA */
+
+        .cta {
+            margin: 0 7% 100px;
+            background: #ff6b35;
+            color: white;
+            border-radius: 30px;
+            padding: 70px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 50px;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            max-width: 550px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #171717;
+            color: white;
+            padding: 16px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 35px 7%;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                display: none;
             }
 
             .hero {
                 flex-direction: column;
-                text-align: center;
-                padding: 50px 5%;
+                padding-top: 60px;
             }
 
-            .description {
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero p {
                 margin-left: auto;
                 margin-right: auto;
             }
 
+            .hero-buttons {
+                justify-content: center;
+            }
+
             .hero-card {
-                width: 280px;
-                height: 280px;
+                width: 100%;
+                max-width: 390px;
             }
 
-            .food-icon {
-                font-size: 90px;
+            .feature-grid {
+                grid-template-columns: 1fr;
             }
 
-            .token {
-                right: -15px;
+            .steps {
+                grid-template-columns: 1fr 1fr;
             }
 
-            .ready {
-                left: -15px;
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+
+            .stat:last-child {
+                border-bottom: none;
+            }
+
+            .cta {
+                padding: 50px 25px;
+            }
+
+            .cta h2 {
+                font-size: 38px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .nav-button {
+                padding: 10px 15px;
+                font-size: 12px;
+            }
+
+            .hero {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .hero h1 {
+                font-size: 52px;
+                letter-spacing: -3px;
+            }
+
+            section {
+                padding: 75px 5%;
+            }
+
+            .section-title h2 {
+                font-size: 38px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
             }
         }
     </style>
@@ -182,46 +520,352 @@
 
 <body>
 
+    <!-- NAVIGATION -->
+
     <nav>
-        <div class="logo">Grab <span>&</span> Go</div>
-        <a href="#" class="nav-link">Smart Canteen</a>
-    </nav>
 
-    <main class="hero">
-
-        <div class="hero-text">
-
-            <div class="tag">🍱 Smart Campus Lunch</div>
-
-            <h1>
-                Skip the queue.<br>
-                <span>Grab & Go.</span>
-            </h1>
-
-            <p class="description">
-                Order your lunch, get your token, track your order,
-                and collect your meal without waiting in long canteen queues.
-            </p>
-
-            <a href="#" class="button">Get Started →</a>
-
+        <div class="logo">
+            Grab <span>&</span> Go
         </div>
 
-        <div class="hero-card">
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How it works</a></li>
+        </ul>
 
-            <div class="food-icon">🍱</div>
+        <a href="#start" class="nav-button">
+            Order Now
+        </a>
 
-            <div class="floating-card token">
-                🎟️ Token #247
+    </nav>
+
+
+    <!-- HERO -->
+
+    <main id="home">
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <div class="tag">
+                    SMART COLLEGE CANTEEN
+                </div>
+
+                <h1>
+                    Skip the queue.<br>
+                    <span>Grab & Go.</span>
+                </h1>
+
+                <p>
+                    Order your food before reaching the canteen,
+                    get your digital token, and collect your packed
+                    meal when it's ready.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#start" class="primary-btn">
+                        Start Ordering →
+                    </a>
+
+                    <a href="#how" class="secondary-btn">
+                        How it works
+                    </a>
+
+                </div>
+
             </div>
 
-            <div class="floating-card ready">
-                ✓ Ready for pickup
+
+            <!-- ORDER PREVIEW CARD -->
+
+            <div class="hero-card">
+
+                <div class="card-top">
+
+                    <strong>Today's Order</strong>
+
+                    <div class="status">
+                        READY SOON
+                    </div>
+
+                </div>
+
+                <div class="food-icon">
+                    🍱
+                </div>
+
+                <h2>
+                    Lunch Combo
+                </h2>
+
+                <p>
+                    Your meal is being prepared.
+                    Collect it from the Grab & Go counter.
+                </p>
+
+                <div class="token-box">
+
+                    <div>
+                        <small>Your Token</small>
+                        <br>
+                        <strong>#G247</strong>
+                    </div>
+
+                    <div class="token-number">
+                        →
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stats-container">
+
+                <div class="stat">
+                    <h2>1000+</h2>
+                    <p>Students during lunch</p>
+                </div>
+
+                <div class="stat">
+                    <h2>100</h2>
+                    <p>Canteen seating capacity</p>
+                </div>
+
+                <div class="stat">
+                    <h2>0</h2>
+                    <p>Needless queue waiting</p>
+                </div>
+
             </div>
 
         </div>
 
     </main>
+
+
+    <!-- FEATURES -->
+
+    <section class="features" id="features">
+
+        <div class="section-title">
+
+            <span>WHY GRAB & GO</span>
+
+            <h2>
+                Built for busy college days.
+            </h2>
+
+            <p>
+                A simple digital system designed to reduce
+                canteen crowding and make lunch faster.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Order Online
+                </h3>
+
+                <p>
+                    Browse the canteen menu and place your
+                    order before reaching the counter.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🎟️
+                </div>
+
+                <h3>
+                    Digital Token
+                </h3>
+
+                <p>
+                    Receive a unique token number after
+                    placing your order.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Grab & Go
+                </h3>
+
+                <p>
+                    Collect your packed meal from the
+                    pickup counter when it's ready.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+
+    <section id="how">
+
+        <div class="section-title">
+
+            <span>HOW IT WORKS</span>
+
+            <h2>
+                Four simple steps.
+            </h2>
+
+            <p>
+                No standing in long queues. No guessing
+                when your food will be ready.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">
+                    01 / CHOOSE
+                </div>
+
+                <h3>
+                    Pick your meal
+                </h3>
+
+                <p>
+                    Open the menu and choose what you
+                    want to eat.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    02 / PAY
+                </div>
+
+                <h3>
+                    Pay digitally
+                </h3>
+
+                <p>
+                    Complete your payment through the
+                    available payment options.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    03 / TOKEN
+                </div>
+
+                <h3>
+                    Get your token
+                </h3>
+
+                <p>
+                    Your order receives a unique token
+                    for easy identification.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    04 / COLLECT
+                </div>
+
+                <h3>
+                    Grab & Go
+                </h3>
+
+                <p>
+                    Collect your packed food when your
+                    order is ready.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- START ORDER CTA -->
+
+    <div class="cta" id="start">
+
+        <h2>
+            Ready to skip the queue?
+        </h2>
+
+        <p>
+            Start your order, get your token and
+            spend your lunch break eating instead
+            of waiting.
+        </p>
+
+        <a href="#" class="cta-button">
+            Order Your Lunch →
+        </a>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            ©️ 2026 Grab & Go
+        </div>
+
+        <div>
+            Smart College Canteen
+        </div>
+
+    </footer>
+
 
 </body>
 </html>
