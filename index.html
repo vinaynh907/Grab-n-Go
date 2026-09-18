@@ -1,0 +1,228 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Grab & Go | Smart Canteen</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f8fc;
+            color: #171717;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            background: white;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #ff6b35;
+        }
+
+        .nav-link {
+            color: #555;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: calc(100vh - 75px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 7%;
+            gap: 50px;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #fff0ea;
+            color: #ff6b35;
+            padding: 9px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-size: clamp(45px, 6vw, 76px);
+            line-height: 1.05;
+            letter-spacing: -3px;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #ff6b35;
+        }
+
+        .description {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #666;
+            max-width: 520px;
+            margin-bottom: 35px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #171717;
+            color: white;
+            text-decoration: none;
+            padding: 16px 28px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Right Side */
+        .hero-card {
+            width: 360px;
+            height: 360px;
+            background: white;
+            border-radius: 35px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .food-icon {
+            font-size: 120px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .token {
+            top: 35px;
+            right: -35px;
+        }
+
+        .ready {
+            bottom: 35px;
+            left: -35px;
+        }
+
+        /* Mobile */
+        @media (max-width: 800px) {
+            nav {
+                padding: 0 5%;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 50px 5%;
+            }
+
+            .description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-card {
+                width: 280px;
+                height: 280px;
+            }
+
+            .food-icon {
+                font-size: 90px;
+            }
+
+            .token {
+                right: -15px;
+            }
+
+            .ready {
+                left: -15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Grab <span>&</span> Go</div>
+        <a href="#" class="nav-link">Smart Canteen</a>
+    </nav>
+
+    <main class="hero">
+
+        <div class="hero-text">
+
+            <div class="tag">🍱 Smart Campus Lunch</div>
+
+            <h1>
+                Skip the queue.<br>
+                <span>Grab & Go.</span>
+            </h1>
+
+            <p class="description">
+                Order your lunch, get your token, track your order,
+                and collect your meal without waiting in long canteen queues.
+            </p>
+
+            <a href="#" class="button">Get Started →</a>
+
+        </div>
+
+        <div class="hero-card">
+
+            <div class="food-icon">🍱</div>
+
+            <div class="floating-card token">
+                🎟️ Token #247
+            </div>
+
+            <div class="floating-card ready">
+                ✓ Ready for pickup
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
