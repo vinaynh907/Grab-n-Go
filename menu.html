@@ -138,12 +138,18 @@ h1{
 }
 
 .food-image{
+    .food-image{
     height:175px;
+    overflow:hidden;
     background:#ededed;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:65px;
+}
+
+.food-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
 }
 
 .info{
@@ -383,7 +389,9 @@ h1{
     <div class="grid">
 
         <div class="card">
-            <div class="food-image">🍚</div>
+            <div class="food-image">
+    <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80" alt="Idli">
+</div>
             <div class="info">
                 <h3>Idli</h3>
                 <p>Soft steamed idlis served with chutney and sambar.</p>
@@ -395,7 +403,9 @@ h1{
         </div>
 
         <div class="card">
-            <div class="food-image">🥞</div>
+            <div class="food-image">
+    <img src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=800&q=80" alt="Dosa">
+</div>
             <div class="info">
                 <h3>Dosa</h3>
                 <p>Crispy South Indian dosa served with chutney and sambar.</p>
@@ -407,7 +417,9 @@ h1{
         </div>
 
         <div class="card">
-            <div class="food-image">🍛</div>
+            <div class="food-image">
+    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80" alt="Vada">
+</div>
             <div class="info">
                 <h3>Vada</h3>
                 <p>Crispy medu vada served with sambar and chutney.</p>
@@ -425,7 +437,9 @@ h1{
     <div class="grid">
 
         <div class="card">
-            <div class="food-image">🍚</div>
+            <div class="food-image">
+    <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80" alt="Veg Fried Rice">
+</div>
             <div class="info">
                 <h3>Fried Rice</h3>
                 <p>Hot and flavorful vegetable fried rice.</p>
@@ -437,7 +451,9 @@ h1{
         </div>
 
         <div class="card">
-            <div class="food-image">🍜</div>
+            <div class="food-image">
+    <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80" alt="Veg Noodles">
+</div>
             <div class="info">
                 <h3>Noodles</h3>
                 <p>Stir-fried noodles with fresh vegetables.</p>
@@ -449,7 +465,9 @@ h1{
         </div>
 
         <div class="card">
-            <div class="food-image">🍛</div>
+            <div class="food-image">
+    <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80" alt="Veg Meals">
+</div>
             <div class="info">
                 <h3>Veg Meals</h3>
                 <p>A filling college lunch with rice, dal and vegetables.</p>
