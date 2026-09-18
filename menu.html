@@ -1,689 +1,593 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grab & Go | Menu</title>
 
-  <title>Grab & Go | Menu</title>
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f7f7f7;
+    color:#171717;
+}
+
+header{
+    height:82px;
+    background:white;
+    border-bottom:1px solid #e5e5e5;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:800;
+}
+
+.logo small{
+    display:block;
+    font-size:11px;
+    letter-spacing:1.5px;
+    color:#777;
+    margin-top:3px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:24px;
+}
+
+.orders{
+    font-size:14px;
+}
+
+.cart-button{
+    border:0;
+    background:#171717;
+    color:white;
+    padding:13px 20px;
+    border-radius:13px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.cart-button:hover{
+    transform:translateY(-2px);
+}
+
+main{
+    max-width:1050px;
+    margin:auto;
+    padding:58px 25px 100px;
+}
+
+.eyebrow{
+    color:#777;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+h1{
+    font-size:44px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#666;
+    max-width:600px;
+    line-height:1.6;
+}
+
+.categories{
+    display:flex;
+    gap:10px;
+    margin:32px 0;
+    flex-wrap:wrap;
+}
+
+.category{
+    border:1px solid #ddd;
+    background:white;
+    padding:12px 20px;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+.category.active{
+    background:#171717;
+    color:white;
+}
+
+.section-title{
+    font-size:25px;
+    margin:32px 0 18px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid #e8e8e8;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.food-image{
+    height:175px;
+    background:#ededed;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:65px;
+}
+
+.info{
+    padding:18px;
+}
+
+.info h3{
+    font-size:19px;
+    margin-bottom:7px;
+}
+
+.info p{
+    color:#777;
+    font-size:13px;
+    line-height:1.5;
+    min-height:40px;
+}
+
+.bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:18px;
+}
+
+.price{
+    font-size:18px;
+    font-weight:800;
+}
+
+.add{
+    border:1px solid #222;
+    background:white;
+    border-radius:10px;
+    padding:10px 16px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.add:hover{
+    background:#171717;
+    color:white;
+}
+
+.add.clicked{
+    transform:scale(.92);
+    background:#171717;
+    color:white;
+}
+
+/* CART */
+
+.cart-panel{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:330px;
+    background:white;
+    border-radius:22px;
+    padding:24px;
+    box-shadow:0 20px 60px rgba(0,0,0,.18);
+    z-index:30;
+    display:none;
+    animation:cartIn .3s ease;
+}
+
+.cart-panel.show{
+    display:block;
+}
+
+@keyframes cartIn{
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.cart-panel h2{
+    margin-bottom:15px;
+}
+
+.cart-items{
+    max-height:260px;
+    overflow:auto;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+    font-size:14px;
+}
+
+.cart-total{
+    display:flex;
+    justify-content:space-between;
+    font-weight:800;
+    font-size:18px;
+    margin:18px 0;
+}
+
+.checkout{
+    width:100%;
+    border:0;
+    background:#171717;
+    color:white;
+    padding:14px;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.empty{
+    color:#777;
+    padding:10px 0;
+}
+
+/* ADD ANIMATION */
+
+.fly{
+    position:fixed;
+    z-index:100;
+    font-size:28px;
+    pointer-events:none;
+    animation:flyCart .7s ease forwards;
+}
+
+@keyframes flyCart{
+    0%{
+        opacity:1;
+        transform:scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translate(75vw,-65vh) scale(.25);
+    }
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    top:100px;
+    left:50%;
+    transform:translateX(-50%) translateY(-20px);
+    background:#171717;
+    color:white;
+    padding:13px 20px;
+    border-radius:30px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:100;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+@media(max-width:800px){
+    .grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:600px){
+    header{
+        padding:0 20px;
     }
 
-    body {
-      background: #f7f7f7;
-      color: #171717;
+    .orders{
+        display:none;
     }
 
-    /* NAVBAR */
-    nav {
-      height: 72px;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 7%;
-      border-bottom: 1px solid #eeeeee;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    h1{
+        font-size:34px;
     }
 
-    .logo {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -1px;
+    .grid{
+        grid-template-columns:1fr;
     }
 
-    .logo span {
-      font-size: 11px;
-      display: block;
-      color: #777;
-      letter-spacing: 1px;
-      margin-top: 2px;
+    .cart-panel{
+        left:15px;
+        right:15px;
+        bottom:15px;
+        width:auto;
     }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
-
-    .orders {
-      color: #555;
-      font-size: 14px;
-    }
-
-    .cart-btn {
-      border: none;
-      background: #171717;
-      color: white;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* HEADER */
-    .header {
-      max-width: 1200px;
-      margin: auto;
-      padding: 55px 7% 30px;
-    }
-
-    .header small {
-      color: #777;
-      font-size: 13px;
-    }
-
-    .header h1 {
-      font-size: 42px;
-      margin: 8px 0;
-      letter-spacing: -1.5px;
-    }
-
-    .header p {
-      color: #666;
-      max-width: 550px;
-      line-height: 1.6;
-    }
-
-    /* CATEGORIES */
-    .categories {
-      max-width: 1200px;
-      margin: 0 auto 30px;
-      padding: 0 7%;
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-    }
-
-    .category {
-      background: white;
-      border: 1px solid #e5e5e5;
-      padding: 11px 18px;
-      border-radius: 30px;
-      white-space: nowrap;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .category.active {
-      background: #171717;
-      color: white;
-      border-color: #171717;
-    }
-
-    /* MENU */
-    .menu {
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 7% 80px;
-    }
-
-    .section-title {
-      font-size: 23px;
-      margin: 35px 0 18px;
-    }
-
-    .food-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .food-card {
-      background: white;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid #eeeeee;
-      transition: 0.2s;
-    }
-
-    .food-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
-    }
-
-    .food-image {
-      height: 180px;
-      background: #e9e9e9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 65px;
-    }
-
-    .food-info {
-      padding: 17px;
-    }
-
-    .food-info h3 {
-      font-size: 18px;
-      margin-bottom: 6px;
-    }
-
-    .food-info p {
-      color: #777;
-      font-size: 13px;
-      line-height: 1.5;
-      min-height: 38px;
-    }
-
-    .food-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 15px;
-    }
-
-    .price {
-      font-weight: 800;
-      font-size: 17px;
-    }
-
-    .add-btn {
-      border: 1px solid #171717;
-      background: white;
-      color: #171717;
-      padding: 9px 17px;
-      border-radius: 9px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .add-btn:hover {
-      background: #171717;
-      color: white;
-    }
-
-    /* CART POPUP */
-    .cart-panel {
-      position: fixed;
-      right: 25px;
-      bottom: 25px;
-      width: 320px;
-      background: white;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 15px 50px rgba(0,0,0,0.18);
-      display: none;
-      z-index: 200;
-    }
-
-    .cart-panel.show {
-      display: block;
-    }
-
-    .cart-panel h2 {
-      margin-bottom: 15px;
-    }
-
-    .cart-items {
-      max-height: 200px;
-      overflow-y: auto;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-      font-size: 14px;
-    }
-
-    .cart-total {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 800;
-      margin: 18px 0;
-    }
-
-    .checkout {
-      width: 100%;
-      padding: 13px;
-      background: #171717;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* MOBILE */
-    @media (max-width: 850px) {
-      .food-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      nav {
-        padding: 0 5%;
-      }
-
-      .orders {
-        display: none;
-      }
-
-      .header {
-        padding: 40px 5% 25px;
-      }
-
-      .header h1 {
-        font-size: 34px;
-      }
-
-      .categories {
-        padding: 0 5%;
-      }
-
-      .menu {
-        padding: 0 5% 60px;
-      }
-
-      .food-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .food-image {
-        height: 190px;
-      }
-
-      .cart-panel {
-        left: 15px;
-        right: 15px;
-        bottom: 15px;
-        width: auto;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav>
+<header>
     <div class="logo">
-      Grab & Go
-      <span>SMART CANTEEN</span>
+        Grab & Go
+        <small>SMART CANTEEN</small>
     </div>
 
-    <div class="nav-right">
-      <div class="orders">My Orders</div>
-      <button class="cart-btn" onclick="toggleCart()">
-        🛒 Cart <span id="cartCount">0</span>
-      </button>
+    <div class="header-right">
+        <div class="orders">My Orders</div>
+        <button class="cart-button" onclick="toggleCart()">
+            🛒 Cart <span id="cartCount">0</span>
+        </button>
     </div>
-  </nav>
+</header>
 
+<main>
 
-  <!-- HEADER -->
-  <section class="header">
-    <small>COLLEGE CANTEEN • TODAY'S MENU</small>
+    <div class="eyebrow">COLLEGE CANTEEN • TODAY'S MENU</div>
 
     <h1>What are you craving?</h1>
 
-    <p>
-      Choose your food, add it to your cart and place your order.
-      We'll prepare it while you continue with your day.
+    <p class="subtitle">
+        Choose your food, add it to your cart and place your order.
+        We'll prepare it while you continue with your day.
     </p>
-  </section>
 
+    <div class="categories">
+        <button class="category active">All</button>
+        <button class="category">🍳 Breakfast</button>
+        <button class="category">🍚 Rice & Meals</button>
+        <button class="category">🥪 Quick Bites</button>
+        <button class="category">🥤 Drinks</button>
+    </div>
 
-  <!-- CATEGORIES -->
-  <div class="categories">
-
-    <button class="category active">
-      All
-    </button>
-
-    <button class="category">
-      🍳 Breakfast
-    </button>
-
-    <button class="category">
-      🍚 Rice & Meals
-    </button>
-
-    <button class="category">
-      🥪 Quick Bites
-    </button>
-
-    <button class="category">
-      🥤 Drinks
-    </button>
-
-  </div>
-
-
-  <!-- MENU -->
-  <main class="menu">
-
-    <!-- BREAKFAST -->
     <h2 class="section-title">Breakfast</h2>
 
-    <div class="food-grid">
+    <div class="grid">
 
-      <div class="food-card">
-        <div class="food-image">🥣</div>
-
-        <div class="food-info">
-          <h3>Idli</h3>
-          <p>Soft steamed idlis served with chutney and sambar.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹30</span>
-            <button class="add-btn" onclick="addItem('Idli', 30)">
-              ADD +
-            </button>
-          </div>
+        <div class="card">
+            <div class="food-image">🍚</div>
+            <div class="info">
+                <h3>Idli</h3>
+                <p>Soft steamed idlis served with chutney and sambar.</p>
+                <div class="bottom">
+                    <span class="price">₹30</span>
+                    <button class="add" onclick="addItem('Idli',30,this)">ADD +</button>
+                </div>
+            </div>
         </div>
-      </div>
 
-
-      <div class="food-card">
-        <div class="food-image">🥞</div>
-
-        <div class="food-info">
-          <h3>Dosa</h3>
-          <p>Crispy South Indian dosa served with chutney and sambar.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹40</span>
-            <button class="add-btn" onclick="addItem('Dosa', 40)">
-              ADD +
-            </button>
-          </div>
+        <div class="card">
+            <div class="food-image">🥞</div>
+            <div class="info">
+                <h3>Dosa</h3>
+                <p>Crispy South Indian dosa served with chutney and sambar.</p>
+                <div class="bottom">
+                    <span class="price">₹40</span>
+                    <button class="add" onclick="addItem('Dosa',40,this)">ADD +</button>
+                </div>
+            </div>
         </div>
-      </div>
 
-
-      <div class="food-card">
-        <div class="food-image">🍛</div>
-
-        <div class="food-info">
-          <h3>Vada</h3>
-          <p>Crispy medu vada served with sambar and chutney.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹30</span>
-            <button class="add-btn" onclick="addItem('Vada', 30)">
-              ADD +
-            </button>
-          </div>
+        <div class="card">
+            <div class="food-image">🍛</div>
+            <div class="info">
+                <h3>Vada</h3>
+                <p>Crispy medu vada served with sambar and chutney.</p>
+                <div class="bottom">
+                    <span class="price">₹30</span>
+                    <button class="add" onclick="addItem('Vada',30,this)">ADD +</button>
+                </div>
+            </div>
         </div>
-      </div>
 
     </div>
 
-
-    <!-- RICE -->
     <h2 class="section-title">Rice & Meals</h2>
 
-    <div class="food-grid">
+    <div class="grid">
 
-      <div class="food-card">
-        <div class="food-image">🍚</div>
-
-        <div class="food-info">
-          <h3>Veg Fried Rice</h3>
-          <p>Fresh vegetables tossed with seasoned fried rice.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹70</span>
-            <button class="add-btn" onclick="addItem('Veg Fried Rice', 70)">
-              ADD +
-            </button>
-          </div>
+        <div class="card">
+            <div class="food-image">🍚</div>
+            <div class="info">
+                <h3>Fried Rice</h3>
+                <p>Hot and flavorful vegetable fried rice.</p>
+                <div class="bottom">
+                    <span class="price">₹60</span>
+                    <button class="add" onclick="addItem('Fried Rice',60,this)">ADD +</button>
+                </div>
+            </div>
         </div>
-      </div>
 
-
-      <div class="food-card">
-        <div class="food-image">🍛</div>
-
-        <div class="food-info">
-          <h3>Veg Meals</h3>
-          <p>A filling South Indian meal with rice, dal and sides.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹80</span>
-            <button class="add-btn" onclick="addItem('Veg Meals', 80)">
-              ADD +
-            </button>
-          </div>
+        <div class="card">
+            <div class="food-image">🍜</div>
+            <div class="info">
+                <h3>Noodles</h3>
+                <p>Stir-fried noodles with fresh vegetables.</p>
+                <div class="bottom">
+                    <span class="price">₹60</span>
+                    <button class="add" onclick="addItem('Noodles',60,this)">ADD +</button>
+                </div>
+            </div>
         </div>
-      </div>
 
-
-      <div class="food-card">
-        <div class="food-image">🥘</div>
-
-        <div class="food-info">
-          <h3>Curd Rice</h3>
-          <p>Cool and refreshing curd rice with a light tempering.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹45</span>
-            <button class="add-btn" onclick="addItem('Curd Rice', 45)">
-              ADD +
-            </button>
-          </div>
+        <div class="card">
+            <div class="food-image">🍛</div>
+            <div class="info">
+                <h3>Veg Meals</h3>
+                <p>A filling college lunch with rice, dal and vegetables.</p>
+                <div class="bottom">
+                    <span class="price">₹70</span>
+                    <button class="add" onclick="addItem('Veg Meals',70,this)">ADD +</button>
+                </div>
+            </div>
         </div>
-      </div>
 
     </div>
 
+</main>
 
-    <!-- QUICK BITES -->
-    <h2 class="section-title">Quick Bites</h2>
+<div class="toast" id="toast">Added to cart ✓</div>
 
-    <div class="food-grid">
-
-      <div class="food-card">
-        <div class="food-image">🥪</div>
-
-        <div class="food-info">
-          <h3>Veg Sandwich</h3>
-          <p>Fresh vegetable sandwich, perfect for a quick bite.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹50</span>
-            <button class="add-btn" onclick="addItem('Veg Sandwich', 50)">
-              ADD +
-            </button>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="food-card">
-        <div class="food-image">🥟</div>
-
-        <div class="food-info">
-          <h3>Samosa</h3>
-          <p>Crispy pastry filled with spiced potato.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹20</span>
-            <button class="add-btn" onclick="addItem('Samosa', 20)">
-              ADD +
-            </button>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="food-card">
-        <div class="food-image">🍜</div>
-
-        <div class="food-info">
-          <h3>Maggi</h3>
-          <p>Hot and tasty noodles prepared fresh.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹45</span>
-            <button class="add-btn" onclick="addItem('Maggi', 45)">
-              ADD +
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-
-    <!-- DRINKS -->
-    <h2 class="section-title">Drinks</h2>
-
-    <div class="food-grid">
-
-      <div class="food-card">
-        <div class="food-image">☕</div>
-
-        <div class="food-info">
-          <h3>Tea</h3>
-          <p>Freshly prepared hot tea.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹15</span>
-            <button class="add-btn" onclick="addItem('Tea', 15)">
-              ADD +
-            </button>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="food-card">
-        <div class="food-image">🥤</div>
-
-        <div class="food-info">
-          <h3>Fresh Juice</h3>
-          <p>Refreshing fruit juice served chilled.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹40</span>
-            <button class="add-btn" onclick="addItem('Fresh Juice', 40)">
-              ADD +
-            </button>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="food-card">
-        <div class="food-image">🥛</div>
-
-        <div class="food-info">
-          <h3>Cold Coffee</h3>
-          <p>Chilled creamy coffee for a refreshing break.</p>
-
-          <div class="food-bottom">
-            <span class="price">₹50</span>
-            <button class="add-btn" onclick="addItem('Cold Coffee', 50)">
-              ADD +
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- CART -->
-  <div class="cart-panel" id="cartPanel">
+<div class="cart-panel" id="cartPanel">
 
     <h2>Your Cart</h2>
 
-    <div class="cart-items" id="cartItems">
-      <p style="color:#777;font-size:14px;">
-        Your cart is empty.
-      </p>
-    </div>
+    <div class="cart-items" id="cartItems"></div>
 
     <div class="cart-total">
-      <span>Total</span>
-      <span>₹<span id="cartTotal">0</span></span>
+        <span>Total</span>
+        <span>₹<span id="total">0</span></span>
     </div>
 
-    <button class="checkout">
-      Proceed to Checkout →
+    <button class="checkout" onclick="goToCheckout()">
+        Proceed to Checkout →
     </button>
 
-  </div>
+</div>
 
+<script>
 
-  <script>
+let cart = JSON.parse(localStorage.getItem("grabGoCart")) || [];
 
-    let cart = [];
-    let total = 0;
+function saveCart(){
+    localStorage.setItem("grabGoCart",JSON.stringify(cart));
+}
 
-    function addItem(name, price) {
+function addItem(name,price,button){
 
-      cart.push({
-        name: name,
-        price: price
-      });
+    cart.push({
+        name:name,
+        price:price
+    });
 
-      total += price;
+    saveCart();
+    updateCart();
 
-      updateCart();
+    button.classList.add("clicked");
 
-    }
+    setTimeout(()=>{
+        button.classList.remove("clicked");
+    },200);
 
+    // Flying food animation
+    const fly=document.createElement("div");
+    fly.className="fly";
+    fly.innerHTML="🍽️";
 
-    function updateCart() {
+    const rect=button.getBoundingClientRect();
 
-      document.getElementById("cartCount").innerText = cart.length;
+    fly.style.left=rect.left+"px";
+    fly.style.top=rect.top+"px";
 
-      document.getElementById("cartTotal").innerText = total;
+    document.body.appendChild(fly);
 
-      const cartItems = document.getElementById("cartItems");
+    setTimeout(()=>{
+        fly.remove();
+    },700);
 
-      if (cart.length === 0) {
+    // Toast
+    const toast=document.getElementById("toast");
+    toast.classList.add("show");
 
-        cartItems.innerHTML =
-          '<p style="color:#777;font-size:14px;">Your cart is empty.</p>';
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },1200);
 
+    // Open cart
+    document.getElementById("cartPanel").classList.add("show");
+}
+
+function updateCart(){
+
+    document.getElementById("cartCount").textContent=cart.length;
+
+    const items=document.getElementById("cartItems");
+
+    if(cart.length===0){
+        items.innerHTML='<div class="empty">Your cart is empty.</div>';
+        document.getElementById("total").textContent="0";
         return;
-      }
-
-      cartItems.innerHTML = "";
-
-      cart.forEach(function(item) {
-
-        const div = document.createElement("div");
-
-        div.className = "cart-item";
-
-        div.innerHTML =
-          "<span>" + item.name + "</span>" +
-          "<strong>₹" + item.price + "</strong>";
-
-        cartItems.appendChild(div);
-
-      });
-
     }
 
+    let total=0;
 
-    function toggleCart() {
+    items.innerHTML="";
 
-      document
-        .getElementById("cartPanel")
-        .classList.toggle("show");
+    cart.forEach((item,index)=>{
 
+        total+=item.price;
+
+        const div=document.createElement("div");
+
+        div.className="cart-item";
+
+        div.innerHTML=`
+            <span>${item.name}</span>
+            <strong>₹${item.price}</strong>
+        `;
+
+        items.appendChild(div);
+
+    });
+
+    document.getElementById("total").textContent=total;
+}
+
+function toggleCart(){
+    document.getElementById("cartPanel").classList.toggle("show");
+}
+
+function goToCheckout(){
+
+    if(cart.length===0){
+        alert("Please add at least one item.");
+        return;
     }
 
-  </script>
+    window.location.href="checkout.html";
+}
+
+updateCart();
+
+</script>
 
 </body>
 </html>
