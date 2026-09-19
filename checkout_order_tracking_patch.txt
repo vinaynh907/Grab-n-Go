@@ -1,0 +1,8 @@
+Add this inside the existing successful checkout/payment function. It creates the My Orders tracking state:
+
+const cart = JSON.parse(localStorage.getItem("grabGoCart") || "[]");
+if (!cart.length) { alert("Your cart is empty."); return; }
+const order = { id: Math.floor(1000 + Math.random() * 9000), createdAt: Date.now(), items: cart };
+localStorage.setItem("grabGoOrder", JSON.stringify(order));
+localStorage.removeItem("grabGoCart");
+window.location.href = "orders.html";
