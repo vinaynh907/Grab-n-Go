@@ -1,0 +1,433 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout | Grab & Go</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --ink:#171513;
+    --muted:#77716b;
+    --line:#e8e2db;
+    --bg:#faf8f5;
+    --accent:#c9542c;
+}
+
+body{
+    font-family:Inter,system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+}
+
+header{
+    height:82px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(250,248,245,.96);
+    border-bottom:1px solid var(--line);
+}
+
+.logo{
+    font-family:Fraunces,Georgia,serif;
+    font-size:25px;
+    font-weight:700;
+    text-decoration:none;
+    color:var(--ink);
+}
+
+.logo small{
+    display:block;
+    font:600 10px Inter,sans-serif;
+    letter-spacing:2px;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.back{
+    text-decoration:none;
+    color:var(--ink);
+    font-size:14px;
+    font-weight:700;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:55px 25px 80px;
+}
+
+h1{
+    font-family:Fraunces,Georgia,serif;
+    font-size:46px;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:var(--muted);
+    margin-bottom:35px;
+}
+
+.checkout-grid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:25px;
+}
+
+.box{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:26px;
+}
+
+.box h2{
+    font-family:Fraunces,Georgia,serif;
+    font-size:25px;
+    margin-bottom:20px;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:15px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.item:last-child{
+    border-bottom:0;
+}
+
+.item-name{
+    font-weight:700;
+}
+
+.item-qty{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:4px;
+}
+
+.item-price{
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.total-row{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:18px;
+    font-weight:800;
+}
+
+.payment-option{
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:16px;
+    margin-bottom:12px;
+    cursor:pointer;
+}
+
+.payment-option:hover{
+    border-color:var(--ink);
+}
+
+.payment-option input{
+    margin-right:10px;
+}
+
+.pay-button{
+    width:100%;
+    border:0;
+    background:var(--ink);
+    color:#fff;
+    padding:16px;
+    border-radius:14px;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+.pay-button:hover{
+    opacity:.9;
+}
+
+.empty{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.empty p{
+    color:var(--muted);
+    margin:10px 0 25px;
+}
+
+.empty a{
+    display:inline-block;
+    text-decoration:none;
+    background:var(--ink);
+    color:#fff;
+    padding:13px 20px;
+    border-radius:999px;
+    font-weight:700;
+}
+
+.success{
+    display:none;
+    text-align:center;
+    padding:55px 25px;
+}
+
+.success h2{
+    font-family:Fraunces,Georgia,serif;
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.success p{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.token{
+    display:inline-block;
+    margin:25px 0;
+    padding:18px 30px;
+    background:var(--ink);
+    color:#fff;
+    border-radius:18px;
+    font-size:25px;
+    font-weight:800;
+}
+
+.view-orders{
+    display:inline-block;
+    background:var(--ink);
+    color:#fff;
+    text-decoration:none;
+    padding:14px 22px;
+    border-radius:999px;
+    font-weight:800;
+}
+
+@media(max-width:750px){
+    .checkout-grid{
+        grid-template-columns:1fr;
+    }
+
+    h1{
+        font-size:38px;
+    }
+
+    header{
+        padding:0 5%;
+    }
+
+    .container{
+        padding-top:40px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">
+        Grab & Go
+        <small>SMART CANTEEN</small>
+    </a>
+
+    <a href="menu.html" class="back">← Back to Menu</a>
+</header>
+
+<main class="container">
+
+    <h1>Checkout</h1>
+    <p class="subtitle">Review your order and choose your payment method.</p>
+
+    <div id="checkoutContent">
+
+        <div class="checkout-grid">
+
+            <section class="box">
+                <h2>Your Order</h2>
+
+                <div id="orderItems"></div>
+
+                <div class="total-row">
+                    <span>Total</span>
+                    <span id="total">₹0</span>
+                </div>
+            </section>
+
+            <section class="box">
+
+                <h2>Payment</h2>
+
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="UPI" checked>
+                    UPI
+                </label>
+
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="Cash">
+                    Pay at Counter
+                </label>
+
+                <button class="pay-button" onclick="placeOrder()">
+                    Place Order
+                </button>
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <div id="emptyCart" class="box empty" style="display:none;">
+        <h2>Your cart is empty</h2>
+        <p>Add some delicious food before checking out.</p>
+        <a href="menu.html">Go to Menu</a>
+    </div>
+
+    <div id="success" class="box success">
+        <h2>Order Placed!</h2>
+
+        <p>
+            Your food is now being prepared.
+            You can follow the progress from My Orders.
+        </p>
+
+        <div class="token">
+            Token #<span id="tokenNumber"></span>
+        </div>
+
+        <br>
+
+        <a href="orders.html" class="view-orders">
+            Track My Order →
+        </a>
+    </div>
+
+</main>
+
+<script>
+
+const cart =
+    JSON.parse(localStorage.getItem("grabGoCart") || "[]");
+
+const orderItems = document.getElementById("orderItems");
+const totalElement = document.getElementById("total");
+const checkoutContent = document.getElementById("checkoutContent");
+const emptyCart = document.getElementById("emptyCart");
+
+let total = 0;
+
+function displayCart(){
+
+    if(cart.length === 0){
+
+        checkoutContent.style.display = "none";
+        emptyCart.style.display = "block";
+
+        return;
+    }
+
+    cart.forEach(item => {
+
+        const quantity = item.quantity || 1;
+        const price = Number(item.price) || 0;
+        const itemTotal = price * quantity;
+
+        total += itemTotal;
+
+        const div = document.createElement("div");
+
+        div.className = "item";
+
+        div.innerHTML = `
+            <div>
+                <div class="item-name">${item.name}</div>
+                <div class="item-qty">Quantity: ${quantity}</div>
+            </div>
+
+            <div class="item-price">
+                ₹${itemTotal}
+            </div>
+        `;
+
+        orderItems.appendChild(div);
+    });
+
+    totalElement.textContent = "₹" + total;
+}
+
+
+function placeOrder(){
+
+    if(cart.length === 0){
+        alert("Your cart is empty.");
+        return;
+    }
+
+    const token =
+        Math.floor(1000 + Math.random() * 9000);
+
+    const order = {
+
+        id: token,
+
+        createdAt: Date.now(),
+
+        items: cart,
+
+        total: total,
+
+        status: "Order received"
+
+    };
+
+    localStorage.setItem(
+        "grabGoOrder",
+        JSON.stringify(order)
+    );
+
+    localStorage.removeItem("grabGoCart");
+
+    document.getElementById("checkoutContent").style.display = "none";
+
+    document.getElementById("emptyCart").style.display = "none";
+
+    document.getElementById("success").style.display = "block";
+
+    document.getElementById("tokenNumber").textContent = token;
+}
+
+
+displayCart();
+
+</script>
+
+</body>
+</html>
+```
