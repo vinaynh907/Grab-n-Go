@@ -1,6 +1,9 @@
-/* Prototype-only browser account helper. Do not use this as production authentication. */
+/* Prototype-only browser account helper. Data is intentionally cleared when the tab closes. */
+// Remove credentials left by the earlier persistent prototype version.
+localStorage.removeItem('grabGoUser');
+localStorage.removeItem('grabGoUsers');
 function getCurrentUser(){
-    return JSON.parse(localStorage.getItem('grabGoUser') || 'null');
+    return JSON.parse(sessionStorage.getItem('grabGoUser') || 'null');
 }
 
 function requireUser(nextPage){
