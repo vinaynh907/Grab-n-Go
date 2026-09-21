@@ -256,7 +256,7 @@ h1{
         <small>SMART CANTEEN</small>
     </a>
 
-    <a href="menu.html" class="back">← Back to Menu</a>
+    <a data-account-link href="login.html" class="back">Log in</a>
 </header>
 
 <main class="container">
@@ -330,6 +330,7 @@ h1{
 
 </main>
 
+<script src="auth.js"></script>
 <script>
 
 const cart =
@@ -384,6 +385,8 @@ function displayCart(){
 
 function placeOrder(){
 
+    if(!requireUser('checkout.html')) return;
+
     if(cart.length === 0){
         alert("Your cart is empty.");
         return;
@@ -409,9 +412,10 @@ function placeOrder(){
 
     };
 
-    const orders = JSON.parse(localStorage.getItem("grabGoOrders") || "[]");
+    const ordersKey = accountOrdersKey();
+    const orders = JSON.parse(localStorage.getItem(ordersKey) || "[]");
     orders.unshift(order);
-    localStorage.setItem("grabGoOrders", JSON.stringify(orders));
+    localStorage.setItem(ordersKey, JSON.stringify(orders));
     localStorage.setItem("grabGoOrder", JSON.stringify(order));
 
     localStorage.removeItem("grabGoCart");
