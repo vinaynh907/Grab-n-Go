@@ -413,9 +413,9 @@ function placeOrder(){
     };
 
     const ordersKey = accountOrdersKey();
-    const orders = JSON.parse(localStorage.getItem(ordersKey) || "[]");
+    const orders = JSON.parse(sessionStorage.getItem(ordersKey) || "[]");
     orders.unshift(order);
-    localStorage.setItem(ordersKey, JSON.stringify(orders));
+    sessionStorage.setItem(ordersKey, JSON.stringify(orders));
     localStorage.setItem("grabGoOrder", JSON.stringify(order));
 
     localStorage.removeItem("grabGoCart");
