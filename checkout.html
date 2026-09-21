@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -393,6 +392,7 @@ function placeOrder(){
     const token =
         Math.floor(1000 + Math.random() * 9000);
 
+    const payment = document.querySelector('input[name="payment"]:checked').value;
     const order = {
 
         id: token,
@@ -403,14 +403,16 @@ function placeOrder(){
 
         total: total,
 
-        status: "Order received"
+        status: "Order received",
+
+        payment: payment
 
     };
 
-    localStorage.setItem(
-        "grabGoOrder",
-        JSON.stringify(order)
-    );
+    const orders = JSON.parse(localStorage.getItem("grabGoOrders") || "[]");
+    orders.unshift(order);
+    localStorage.setItem("grabGoOrders", JSON.stringify(orders));
+    localStorage.setItem("grabGoOrder", JSON.stringify(order));
 
     localStorage.removeItem("grabGoCart");
 
@@ -430,4 +432,3 @@ displayCart();
 
 </body>
 </html>
-```
