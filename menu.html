@@ -418,6 +418,7 @@ h1{
 
     <div class="header-right">
         <a href="index.html" class="orders">Home</a>
+        <a data-account-link href="login.html" class="orders">Log in</a>
         <a href="orders.html" class="orders">My Orders</a>
         <button class="cart-button" onclick="location.href='cart.html'">
             Cart <span id="cartCount">0</span>
@@ -673,6 +674,7 @@ h1{
 
 </div>
 
+<script src="auth.js"></script>
 <script>
 
 let cart = JSON.parse(localStorage.getItem("grabGoCart") || "[]");
