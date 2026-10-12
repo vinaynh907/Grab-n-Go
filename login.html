@@ -1,0 +1,64 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Start session | Grab & Go</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}:root{--ink:#171513;--muted:#77716b;--line:#e8e2db;--bg:#faf8f5;--accent:#c9542c}body{font-family:Inter,sans-serif;background:var(--bg);color:var(--ink)}header{height:82px;padding:0 7%;display:flex;align-items:center;border-bottom:1px solid var(--line)}.logo{font:700 25px Fraunces,serif;color:var(--ink);text-decoration:none}.logo small{display:block;font:600 10px Inter,sans-serif;letter-spacing:2px;color:var(--muted)}main{max-width:470px;margin:auto;padding:76px 25px}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:13px}h1{font:700 46px/1.05 Fraunces,serif}.intro{color:var(--muted);line-height:1.6;margin:14px 0 30px}.card{background:#fff;border:1px solid var(--line);border-radius:25px;padding:27px}label{display:block;font-size:13px;font-weight:800;margin:18px 0 8px}input{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px 14px;font:15px Inter,sans-serif}button{width:100%;border:0;border-radius:14px;padding:15px;margin-top:24px;background:var(--ink);color:#fff;font:800 15px Inter,sans-serif;cursor:pointer}.note{font-size:12px;line-height:1.55;color:var(--muted);margin-top:17px}
+/* Mobile-first layout refinements */
+img{max-width:100%}
+button,a{-webkit-tap-highlight-color:transparent}
+a,button{touch-action:manipulation}
+main,.container{width:100%;min-width:0}
+input,select,textarea{max-width:100%;font:inherit}
+.mobile-menu-btn{display:none}
+@media(max-width:700px){
+  header{height:auto!important;min-height:68px;padding:12px 16px!important;gap:10px;flex-wrap:wrap}
+  .logo{font-size:22px!important;line-height:1.05;white-space:nowrap}
+  .logo small{font-size:8px!important;letter-spacing:1.6px!important}
+  header nav,.header-right{display:flex;align-items:center;gap:7px!important;flex-wrap:wrap}
+  header nav a,.header-right a{font-size:12px!important}
+  .orders{padding:9px 11px!important}
+  .cart,.cart-button{padding:10px 12px!important;font-size:12px!important}
+  .mobile-menu-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;text-decoration:none;background:#c9542c;color:#fff;border-radius:999px;padding:10px 13px;font-size:13px;font-weight:800}
+  body{overflow-x:hidden}
+  h1{font-size:clamp(34px,9vw,46px)!important;line-height:1.06!important;letter-spacing:-1px!important}
+  h2{line-height:1.15}
+  .hero{grid-template-columns:1fr!important;gap:25px!important;padding:34px 18px 28px!important}
+  .hero p{font-size:14px!important;line-height:1.7!important}
+  .hero-art{min-height:250px!important}
+  .hero-card{border-radius:22px!important}
+  .hero-label{left:16px!important;right:16px!important;bottom:16px!important;gap:10px}
+  .hero-label strong{font-size:17px!important}
+  .quick,.orders-preview{padding:18px 16px 36px!important}
+  .quick-title{font-size:25px!important}
+  .quick-grid{grid-template-columns:1fr!important;gap:12px!important}
+  .quick-card{padding:19px!important;border-radius:18px!important}
+  .order-box,.empty-order{padding:21px!important;border-radius:20px!important;gap:16px!important}
+  footer{padding:22px 16px!important}
+  .container{padding:24px 16px!important}
+  .intro{padding:30px 18px 18px!important}
+  .checkout-grid{grid-template-columns:1fr!important;gap:16px!important}
+  .cart-box,.box,.card{width:100%;min-width:0;border-radius:18px!important}
+  .cart-box{padding:18px!important}
+  .actions{flex-wrap:wrap;gap:10px!important}
+  .actions a,.actions button,.pay-button,.view-orders{min-height:44px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+  .food-image{height:auto!important;aspect-ratio:1/1;object-fit:cover}
+  .card{overflow:hidden}
+  .categories{display:flex;gap:8px;overflow-x:auto;white-space:nowrap;padding-bottom:8px;max-width:100%;scrollbar-width:thin}
+  .category{flex:0 0 auto}
+  .menu-section{padding-left:16px!important;padding-right:16px!important}
+  .cart-panel{width:100%!important;max-width:100vw!important}
+  .cart-item,.cart-item-details{min-width:0}
+  .cart-item-name,.item-name{overflow-wrap:anywhere}
+  .items,.item{min-width:0}
+  .total,.total-row{gap:10px}
+  .payment-option{padding:13px!important}
+  .token{overflow-wrap:anywhere}
+}
+@media(max-width:390px){
+  header{padding:10px 12px!important;gap:8px}
+  .logo{font-size:20px!important}
+  .mobile-menu-btn{padding:9px 10px;font-size:12px}
+  header nav,.header-right{gap:5px!important}
+  .orders{padding:8px 9px!important}
+  .grid{grid-template-columns:1fr!important}
+  .hero-art{min-height:220px!important}
+}
+
+</style></head><body><header><a class="logo" href="index.html">Grab & Go<small>SMART CANTEEN</small></a></header><main><div class="eyebrow">Prototype session</div><h1>Start ordering</h1><p class="intro">Enter a display name to use this demo. Nothing is kept after you close this tab.</p><section class="card"><form id="form"><label for="name">Display name</label><input id="name" autocomplete="name" placeholder="Your name" required><label for="email">Email (optional)</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"><button>Continue</button></form><p class="note">This is not an official account or secure login. The session and its orders are automatically cleared when the tab closes.</p></section></main><script>document.getElementById('form').addEventListener('submit',event=>{event.preventDefault();const name=document.getElementById('name').value.trim(),email=document.getElementById('email').value.trim().toLowerCase()||`guest-${Date.now()}@local`;sessionStorage.setItem('grabGoUser',JSON.stringify({name,email}));location.href=new URLSearchParams(location.search).get('next')||'account.html'})</script></body></html>
